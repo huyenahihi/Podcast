@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert post</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="dashboard">
+                <div class="left">
+                    <span class="left__icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <div class="left__content">
+                        <!-- <div class="left__logo">LOGO</div> -->
+                        <div class="left__profile">
+                            <div class="left__image"><img id="image-admin" src="" alt=""></div>
+                            <p id="username-admin" class="left__name"></p>
+                        </div>
+                        <ul class="left__menu">
+                            <li class="left__menuItem">
+                                <a href="index.html" class="left__title"><img src="assets/icon-dashboard.svg"
+                                        alt="">Home Page</a>
+                            </li>
+                            <li class="left__menuItem">
+                                <div class="left__title"><img src="assets/icon-tag.svg" alt="">Blog & podcast<img
+                                        class="left__iconDown" src="assets/arrow-down.svg" alt=""></div>
+                                <div class="left__text">
+                                    <a class="left__link" href="insert_post.html">Insert post</a>
+                                    <a class="left__link" href="insert_podcast.html">Insert podcast</a>
+                                    <a class="left__link" href="view_post.html">View post</a>
+                                    <a class="left__link" href="view_podcast.html">View podcast</a>
+                                </div>
+                            </li>
+                            <li class="left__menuItem">
+                                <div class="left__title"><img src="assets/icon-edit.svg" alt="">Category Blog<img
+                                        class="left__iconDown" src="assets/arrow-down.svg" alt=""></div>
+                                <div class="left__text">
+                                    <a class="left__link" href="insert_category.html">Insert category</a>
+                                    <a class="left__link" href="view_category.html">View category</a>
+                                </div>
+                            </li>
+                            <li class="left__menuItem">
+                                <div class="left__title"><img src="assets/icon-edit.svg" alt="">Category PodCast<img
+                                        class="left__iconDown" src="assets/arrow-down.svg" alt=""></div>
+                                <div class="left__text">
+                                    <a class="left__link" href="insert_category.html">Insert category</a>
+                                    <a class="left__link" href="view_categorypostcast.html">View category</a>
+                                </div>
+                            </li>
+                            <li class="left__menuItem">
+                                <div class="left__title"><img src="assets/icon-book.svg" alt="">Course<img
+                                        class="left__iconDown" src="assets/arrow-down.svg" alt=""></div>
+                                <div class="left__text">
+                                    <a class="left__link" href="insert_course.html">Insert course</a>
+                                    <a class="left__link" href="view_course.html">View course</a>
+                                </div>
+                            </li>
+                            <li class="left__menuItem">
+                                <a href="view_customers.html" class="left__title"><img src="assets/icon-users.svg"
+                                        alt="">User</a>
+                            </li>
+                            <li class="left__menuItem">
+                                <div class="left__title"><img src="assets/icon-user.svg" alt="">Admin<img
+                                        class="left__iconDown" src="assets/arrow-down.svg" alt=""></div>
+                                <div class="left__text">
+                                    <a class="left__link" href="insert_admin.html">Insert admin</a>
+                                    <a class="left__link" href="view_admins.html">View admins</a>
+                                </div>
+                            </li>
+                            <li class="left__menuItem">
+                                <a   id="logoutadmin" class="left__title"><img src="assets/icon-logout.svg" alt="">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="right__content">
+                        <div class="right__title">Dashboard</div>
+                        <p class="right__desc">Insert post</p>
+                        <div class="right__formWrapper">
+                            <form action="" method="post" enctype="multipart/form-data" id="formpost">
+                                <div class="containdiv">
+                                    <div class="div">
+                                        <div class="right__inputWrapper">
+                                            <label for="title">Title</label>
+                                            <input type="text" id="title" placeholder="Tiêu đề">
+                                        </div>
+                                        <div class="right__inputWrapper">
+                                            <label for="image">Image</label>
+                                            <input type="file" id="fileimage">
+                                        </div>
+                                        <div class="right__inputWrapper">
+                                            <label for="desc">Content</label>
+                                            <textarea name="" id="content" cols="30" rows="15"
+                                                placeholder="Write something..."></textarea>
+                                        </div>
+                                        <button class="btn" onclick="submit_blog()" type="submit">ADD</button>
+                                    </div>
+
+                                    <div class="div">
+                                        <div class="right__inputWrapper">
+                                            <label for="p_category">Category</label>
+                                            <select name="" id="postcategory">
+                                              
+                                            </select>
+                                        </div>
+                                        <div class="right__inputWrapper" id="podcast2" style="display: none">
+                                            <label for="label">Course</label>
+                                            <select  name="" id="courses_name">
+
+                                            </select>
+                                        </div>
+                                        <div class="right__inputWrapper">
+                                            <label for="p_category">Rank</label>
+                                            <select name="" id="ranker">
+                                                <option disabled selected>Select rank</option>
+                                                <option value="1">vàng</option>
+                                                <option value="2">kim cương</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="API/index.js"></script>
+</body>
+<script>
+        const form = document.getElementById('formpost')
+        var postApiBlog= "http://localhost:8000/post";
+        var postApiPod= "http://localhost:8000/podcast";
+            form.addEventListener('submit', function (e) {
+            let input = (document.getElementById('fileimage').value).split("\\").pop();;
+           
+            let title = document.getElementById('title').value;
+
+            let content = document.getElementById('content').value;
+  
+            let postcategory = document.getElementById('postcategory').value;
+      
+            let ranker = document.getElementById('ranker').value;
+      
+            var getUrl = window.location;
+            var localhost = getUrl.protocol + "//" + getUrl.host + "/";
+            let id = sessionStorage.getItem('idadmin');
+
+            let name = sessionStorage.getItem('useradmin');
+            alert(name);
+
+            var datas =  {
+                "id_user": id,
+                "id_category": postcategory,
+                "user": name,
+                "title": title,
+                "image": localhost+ "WebsitePodcast/IMG/" + input,
+                "content": content,
+                "numview": "0",
+                "numcomment": "0",
+                "numlove":"0",
+                "islove": "0",
+                "isgroup": "0",
+                "idgroup": "0",
+                "ranker": ranker
+    };
+  
+            VALUE = JSON.stringify(datas);
+            alert(VALUE);
+
+  const myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
+  myHeaders.append('Access-Control-Allow-Methods','GET,PUT,POST,DELETE,PATCH,OPTIONS');
+  myHeaders.append('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept');
+  myHeaders.append('Access-Control-Allow-Origin', '*');
+  myHeaders.append('Access-Control-Allow-Credentials', 'true');
+    fetch(postApiBlog, {
+    method: 'POST',
+    headers: myHeaders,
+    mode: 'no-cors',
+    body: VALUE
+  })
+    .then(data => {
+      console.log(data);
+    //   window.location.href = "view_admins.html";
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
+</script>
+
+</html>
